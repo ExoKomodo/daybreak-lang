@@ -1,0 +1,25 @@
+{
+    "name": "daybreak-lang",
+    "displayName": "Daybreak Lang",
+    "description": "Syntax highlighting for Daybreak lang",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.63.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "daybreak",
+            "aliases": ["Daybreak", "daybreak"],
+            "extensions": [".day",".daybreak"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "daybreak",
+            "scopeName": "source.day",
+            "path": "./syntaxes/daybreak.tmLanguage.json"
+        }]
+    }
+}

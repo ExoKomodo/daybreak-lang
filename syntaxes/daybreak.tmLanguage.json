@@ -1,0 +1,97 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Daybreak",
+	"patterns": [
+		{
+			"include": "#declarations"
+		},
+		{
+			"include": "#comments"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.daybreak",
+					"match": "\\b(while|for|unless|until)\\b"
+				}
+			]
+		},
+		"declarations": {
+			"patterns": [
+				{
+					"name": "meta.function.daybreak",
+					"begin": "(fun) ([a-zA-Z_][a-zA-Z0-9_]*) ([(][)]) (=>) ([a-zA-Z_][a-zA-Z0-9_]*) (is)",
+					"end": "(end)",
+					"beginCaptures": {
+						"1": {
+							"name": "storage.type.function.daybreak"
+						},
+						"2": {
+							"name": "entity.name.function.daybreak"
+						},
+						"5": {
+							"name": "entity.name.type.daybreak"
+						},
+						"6": {
+							"name": "storage.type.function.daybreak"
+						}
+					},
+					"endCaptures": {
+						"1": {
+							"name": "storage.type.function.daybreak"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#strings"
+						},
+						{
+							"include": "#keywords"
+						},
+						{
+							"include": "#numbers"
+						}
+					]
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.daybreak",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.daybreak",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+						"name": "comment.line.daybreak",
+						"match": "\\?\\?.*"
+				},
+				{
+					"name": "comment.line.daybreak",
+					"begin": "\\?\\*",
+					"end": "\\*\\?"
+			  }
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.daybreak",
+					"match": "\\b(0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.day"
+}

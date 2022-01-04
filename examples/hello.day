@@ -1,0 +1,4 @@
+fun main () => Int is
+  puts "Hello world"
+  0
+end

@@ -75,13 +75,8 @@
 			"patterns": [
 				{
 						"name": "comment.line.daybreak",
-						"match": "\\?\\?.*"
-				},
-				{
-					"name": "comment.line.daybreak",
-					"begin": "\\?\\*",
-					"end": "\\*\\?"
-			  }
+						"match": "\\?.*"
+				}
 			]
 		},
 		"numbers": {

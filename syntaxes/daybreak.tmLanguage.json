@@ -7,6 +7,10 @@
 		},
 		{
 			"include": "#comments"
+		},
+		{
+			"match": "end",
+			"name": "keyword.control.end.daybreak"
 		}
 	],
 	"repository": {
@@ -14,7 +18,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.daybreak",
-					"match": "\\b(while|for|unless|until)\\b"
+					"match": "\\b(match|return|end|let)\\b"
 				}
 			]
 		},
@@ -22,7 +26,7 @@
 			"patterns": [
 				{
 					"name": "meta.function.daybreak",
-					"begin": "(fun) ([a-zA-Z_][a-zA-Z0-9_]*) ([(][)]) (=>) ([a-zA-Z_][a-zA-Z0-9_]*) (is)",
+					"begin": "(fun)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*[(](.*)[)]\\s*(=>)\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s+(is)",
 					"end": "(end)",
 					"beginCaptures": {
 						"1": {
@@ -30,6 +34,16 @@
 						},
 						"2": {
 							"name": "entity.name.function.daybreak"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#parameters"
+								}
+							]
+						},
+						"4": {
+							"name": "arrow.daybreak"
 						},
 						"5": {
 							"name": "entity.name.type.daybreak"
@@ -40,7 +54,11 @@
 					},
 					"endCaptures": {
 						"1": {
-							"name": "storage.type.function.daybreak"
+							"patterns": [
+								{
+									"include": "#keywords"
+								}
+							]
 						}
 					},
 					"patterns": [
@@ -84,6 +102,22 @@
 				{
 					"name": "constant.numeric.daybreak",
 					"match": "\\b(0x[0-9a-fA-F]+|[0-9]+(\\.[0-9]+)?)\\b"
+				}
+			]
+		},
+		"parameters": {
+			"patterns": [
+				{
+					"name": "variable.parameter.daybreak",
+					"match": "([a-zA-Z_][a-zA-Z0-9_]*)\\s*:\\s*([a-zA-Z_][a-zA-Z0-9_]*",
+					"captures": {
+						"1": {
+							"name": "variable.parameter.daybreak"
+						},
+						"2": {
+							"name": "entity.name.type.daybreak"
+						}
+					}
 				}
 			]
 		}

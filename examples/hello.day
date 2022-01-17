@@ -1,4 +1,4 @@
 fun main () => Int is
-  puts "Hello world"
-  0
+  (puts "Hello world")
+  return 0
 end

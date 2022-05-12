@@ -6,6 +6,12 @@
 			"include": "#comments"
 		},
 		{
+			"include": "#imports"
+		},
+		{
+			"include": "#strings"
+		},
+		{
 			"include": "#functionDeclarations"
 		},
 		{
@@ -25,7 +31,7 @@
 					},
 					"patterns": [
 						{
-							"include": "#expressions"
+							"include": "#statements"
 						}
 					],
 					"endCaptures": {
@@ -33,6 +39,17 @@
 							"name": "keyword.control.daybreak"
 						}
 					}
+				},
+				{
+					"include": "#keywords"
+				}
+			]
+		},
+		"imports": {
+			"patterns": [
+				{
+					"name": "keyword.daybreak",
+					"match": "\\b(import|importc)\\b"
 				}
 			]
 		},
@@ -74,23 +91,7 @@
 		"expressions": {
 			"patterns": [
 				{
-					"begin": "(\\()\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
-					"end": "(\\))",
-					"beginCaptures": {
-						"2": {
-							"name": "entity.name.function.daybreak",
-							"patterns": [
-								{
-									"include": "#identifiers"
-								}
-							]
-						}
-					},
-					"patterns": [
-						{
-							"include": "#expressions"
-						}
-					]
+					"include": "#callExpression"
 				},
 				{
 					"begin": "({)\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
@@ -140,13 +141,32 @@
 				}
 			]
 		},
+		"callExpression": {
+			"begin": "(\\()\\s*([a-zA-Z_][a-zA-Z0-9_]*)\\s*",
+			"end": "(\\))",
+			"beginCaptures": {
+				"2": {
+					"name": "entity.name.function.daybreak",
+					"patterns": [
+						{
+							"include": "#identifiers"
+						}
+					]
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expressions"
+				}
+			]
+		},
 		"fieldDeclarations": {
 			"patterns": [
 				{
-					"match": "([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)$",
+					"match": "([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)",
 					"captures": {
 						"1": {
-							"name": "entity.name.daybreak"
+							"name": "variable.parameter"
 						},
 						"2": {
 							"name": "punctuation.separator.type.daybreak"
@@ -161,50 +181,38 @@
 		"functionDeclarations": {
 			"patterns": [
 				{
-					"begin": "^(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(\\()(.*)(\\))\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s+(is)\\s*",
+					"begin": "(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*\\((.*)(\\))\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s+(is)",
 					"end": "(end)",
 					"beginCaptures": {
 						"1": {
 							"name": "storage.daybreak"
 						},
 						"2": {
-							"name": "entity.name.type.daybreak"
+							"name": "entity.name.function"
 						},
 						"3": {
-							"name": "storage.type.daybreak"
-						},
-						"4": {
 							"patterns": [
 								{
 									"include": "#fieldDeclarations"
 								}
 							]
 						},
-						"5": {
+						"4": {
 							"name": "storage.type.daybreak"
 						},
-						"6": {
+						"5": {
 							"name": "entity.name.type.daybreak"
 						},
-						"7": {
+						"6": {
 							"name": "keyword.other.daybreak"
+						},
+						"7": {
+							"name": "keyword.control.daybreak"
 						}
 					},
 					"patterns": [
 						{
-							"include": "#keywords"
-						},
-						{
-							"include": "#variableBindings"
-						},
-						{
-							"include": "#controlStatements"
-						},
-						{
-							"include": "#expressions"
-						},
-						{
-							"include": "#comments"
+							"include": "#statements"
 						}
 					],
 					"endCaptures": {
@@ -257,13 +265,13 @@
 		"variableBindings": {
 			"patterns": [
 				{
-					"match": "(let)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)\\s*",
+					"match": "(let)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)",
 					"captures": {
 						"1": {
 							"name": "storage.daybreak"
 						},
 						"2": {
-							"name": "entity.name.daybreak"
+							"name": "variable.name"
 						},
 						"3": {
 							"name": "punctuation.separator.type.daybreak"
@@ -275,6 +283,28 @@
 							"name": "punctuation.separator.type.daybreak"
 						}
 					}
+				}
+			]
+		},
+		"statements": {
+			"patterns": [
+				{
+					"include": "#comments"
+				},
+				{
+					"include": "#keywords"
+				},
+				{
+					"include": "#variableBindings"
+				},
+				{
+					"include": "#controlStatements"
+				},
+				{
+					"include": "#expressions"
+				},
+				{
+					"include": "#comments"
 				}
 			]
 		}

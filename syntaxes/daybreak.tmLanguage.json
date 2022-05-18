@@ -41,6 +41,25 @@
 					}
 				},
 				{
+					"begin": "(do)\\s+",
+					"end": "(end)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.daybreak"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#statements"
+						}
+					],
+					"endCaptures": {
+						"1": {
+							"name": "keyword.control.daybreak"
+						}
+					}
+				},
+				{
 					"include": "#keywords"
 				}
 			]

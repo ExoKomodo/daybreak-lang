@@ -12,6 +12,9 @@
 			"include": "#strings"
 		},
 		{
+			"include": "#moduleLevelBindings"
+		},
+		{
 			"include": "#functionDeclarations"
 		},
 		{
@@ -300,6 +303,42 @@
 						},
 						"5": {
 							"name": "punctuation.separator.type.daybreak"
+						}
+					}
+				}
+			]
+		},
+		"moduleLevelBindings": {
+			"patterns": [
+				{
+					"match": "(let)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)(.*)",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "variable.name",
+							"patterns": [
+								{
+									"include": "#identifiers"
+								}
+							]
+						},
+						"3": {
+							"name": "punctuation.separator.type.daybreak"
+						},
+						"4": {
+							"name": "storage.type.daybreak"
+						},
+						"5": {
+							"name": "punctuation.separator.type.daybreak"
+						},
+						"6": {
+							"patterns": [
+								{
+									"include": "#expressions"
+								}
+							]
 						}
 					}
 				}

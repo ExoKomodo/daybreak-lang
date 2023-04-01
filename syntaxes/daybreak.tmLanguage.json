@@ -203,6 +203,56 @@
 		"functionDeclarations": {
 			"patterns": [
 				{
+					"match": "(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "entity.name.function"
+						}
+					}
+				},
+				{
+					"match": "(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*\\((.*)(\\))",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "entity.name.function"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#fieldDeclarations"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*\\((.*)(\\))\\s*([a-zA-Z_][a-zA-Z_0-9]*)",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "entity.name.function"
+						},
+						"3": {
+							"patterns": [
+								{
+									"include": "#fieldDeclarations"
+								}
+							]
+						},
+						"4": {
+							"name": "storage.type.daybreak"
+						}
+					}
+				},
+				{
 					"begin": "(fun)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*\\((.*)(\\))\\s*([a-zA-Z_][a-zA-Z_0-9]*)\\s+(do)",
 					"end": "(end)",
 					"beginCaptures": {
@@ -287,6 +337,20 @@
 		"variableBindings": {
 			"patterns": [
 				{
+					"match": "(let|mut)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(<-)",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "variable.name"
+						},
+						"3": {
+							"name": "punctuation.separator.type.daybreak"
+						}
+					}
+				},
+				{
 					"match": "(let|mut)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)",
 					"captures": {
 						"1": {
@@ -311,7 +375,33 @@
 		"moduleLevelBindings": {
 			"patterns": [
 				{
-					"match": "(let)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)(.*)",
+					"match": "(let|mut)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(<-)(.*)",
+					"captures": {
+						"1": {
+							"name": "storage.daybreak"
+						},
+						"2": {
+							"name": "variable.name",
+							"patterns": [
+								{
+									"include": "#identifiers"
+								}
+							]
+						},
+						"3": {
+							"name": "punctuation.separator.type.daybreak"
+						},
+						"4": {
+							"patterns": [
+								{
+									"include": "#expressions"
+								}
+							]
+						}
+					}
+				},
+				{
+					"match": "(let|mut)\\s+([a-zA-Z_][a-zA-Z_0-9]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z_0-9<>]*)\\s*(<-)(.*)",
 					"captures": {
 						"1": {
 							"name": "storage.daybreak"
